@@ -1,6 +1,8 @@
 <resources>
-    <string name="app_name">Assignment 1</string>
+    <string name="app_name">Phone Repair Store Manager</string>
     <string name="button_addStore">Add Store</string>
-    <string name="hint_storeTitle">Store Title</string>
+    <string name="hint_storeTitle">Store Name</string>
     <string name="hint_storeDescription">Description of Store</string>
+    <string name="menu_addStore">Add</string>
+    <string name="menu_cancelStore">Cancel</string>
 </resources>

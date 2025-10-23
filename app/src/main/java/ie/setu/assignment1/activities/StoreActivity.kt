@@ -9,7 +9,6 @@ import ie.setu.assignment1.R
 import ie.setu.assignment1.databinding.ActivityStoreBinding
 import ie.setu.assignment1.main.MainApp
 import ie.setu.assignment1.models.StoreModel
-import timber.log.Timber.i
 
 class StoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoreBinding
@@ -18,29 +17,36 @@ class StoreActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        var edit = false
         binding = ActivityStoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
-        i("Store Activity started...")
+
+        if (intent.hasExtra("store_edit")) {
+            edit = true
+            store = intent.extras?.getParcelable("store_edit")!!
+            binding.storeName.setText(store.name)
+            binding.description.setText(store.description)
+            binding.btnAdd.setText(R.string.save_store)
+        }
 
         binding.btnAdd.setOnClickListener() {
-            store.title = binding.storeTitle.text.toString()
+            store.name = binding.storeName.text.toString()
             store.description = binding.description.text.toString()
-            if (store.title.isNotEmpty()) {
-                app.stores.add(store.copy())
-                for (i in app.stores.indices) {
-                    i("Store[$i]:${this.app.stores[i]}")
-                }
-                setResult(RESULT_OK)
-                finish()
-                }
-            else {
-                Snackbar
-                    .make(it,"Please Enter a title", Snackbar.LENGTH_LONG)
+            if (store.name.isEmpty()) {
+                Snackbar.make(it,R.string.enter_store_name, Snackbar.LENGTH_LONG)
                     .show()
+            } else {
+                if (edit) {
+                    app.stores.update(store.copy())
+                } else {
+                    app.stores.create(store.copy())
+                }
             }
+            setResult(RESULT_OK)
+            finish()
         }
     }
 

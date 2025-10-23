@@ -9,10 +9,12 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.assignment1.R
 import ie.setu.assignment1.adapters.StoreAdapter
+import ie.setu.assignment1.adapters.StoreListener
 import ie.setu.assignment1.databinding.ActivityStoreListBinding
 import ie.setu.assignment1.main.MainApp
+import ie.setu.assignment1.models.StoreModel
 
-class StoreListActivity : AppCompatActivity() {
+class StoreListActivity : AppCompatActivity(), StoreListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityStoreListBinding
@@ -28,7 +30,8 @@ class StoreListActivity : AppCompatActivity() {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        binding.recyclerView.adapter = StoreAdapter(app.stores)
+        //binding.recyclerView.adapter = StoreAdapter(app.stores)
+        binding.recyclerView.adapter = StoreAdapter(app.stores.findAll(), this)
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -52,7 +55,23 @@ class StoreListActivity : AppCompatActivity() {
         ) {
             if (it.resultCode == RESULT_OK) {
                 (binding.recyclerView.adapter)?.
-                notifyItemRangeChanged(0,app.stores.size)
+                notifyItemRangeChanged(0,app.stores.findAll().size)
+            }
+        }
+
+    override fun onStoreClick(store: StoreModel) {
+        val launcherIntent = Intent(this, StoreActivity::class.java)
+        launcherIntent.putExtra("store_edit", store)
+        getClickResult.launch(launcherIntent)
+    }
+
+    private val getClickResult =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) {
+            if (it.resultCode == RESULT_OK) {
+                (binding.recyclerView.adapter)?.
+                notifyItemRangeChanged(0,app.stores.findAll().size)
             }
         }
 }

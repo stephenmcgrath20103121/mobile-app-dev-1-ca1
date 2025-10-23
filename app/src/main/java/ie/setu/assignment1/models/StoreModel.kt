@@ -1,3 +1,9 @@
 package ie.setu.assignment1.models
 
-data class StoreModel(var title: String = "", var description: String = "")
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class StoreModel(var id: Long = 0,
+                      var name: String = "",
+                      var description: String = ""): Parcelable

@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.RecyclerView
 import ie.setu.assignment1.databinding.CardStoreBinding
 import ie.setu.assignment1.models.StoreModel
 
-class StoreAdapter(private var stores: List<StoreModel>) :
+interface StoreListener {
+    fun onStoreClick(store: StoreModel)
+}
+
+class StoreAdapter(private var stores: List<StoreModel>, private val listener: StoreListener) :
     RecyclerView.Adapter<StoreAdapter.MainHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainHolder {
@@ -17,7 +21,7 @@ class StoreAdapter(private var stores: List<StoreModel>) :
 
     override fun onBindViewHolder(holder: MainHolder, position: Int) {
         val store = stores[holder.adapterPosition]
-        holder.bind(store)
+        holder.bind(store, listener)
     }
 
     override fun getItemCount(): Int = stores.size
@@ -25,9 +29,10 @@ class StoreAdapter(private var stores: List<StoreModel>) :
     class MainHolder(private val binding : CardStoreBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(store: StoreModel) {
-            binding.storeTitle.text = store.title
+        fun bind(store: StoreModel, listener: StoreListener) {
+            binding.storeName.text = store.name
             binding.description.text = store.description
+            binding.root.setOnClickListener { listener.onStoreClick(store) }
         }
     }
 }

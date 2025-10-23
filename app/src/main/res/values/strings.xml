@@ -1,8 +1,10 @@
 <resources>
     <string name="app_name">Phone Repair Store Manager</string>
     <string name="button_addStore">Add Store</string>
-    <string name="hint_storeTitle">Store Name</string>
+    <string name="hint_storeName">Store Name</string>
     <string name="hint_storeDescription">Description of Store</string>
     <string name="menu_addStore">Add</string>
     <string name="menu_cancelStore">Cancel</string>
+    <string name="save_store"> Save Store </string>
+    <string name="enter_store_name"> Please enter the Store\'s Name </string>
 </resources>

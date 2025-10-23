@@ -42,12 +42,12 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/storeTitle"
+                    android:id="@+id/storeName"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_margin="8dp"
-                    android:autofillHints="hint"
-                    android:hint="@string/hint_storeTitle"
+                    android:autofillHints=""
+                    android:hint="@string/hint_storeName"
                     android:inputType="text"
                     android:maxLength="25"
                     android:maxLines="1"

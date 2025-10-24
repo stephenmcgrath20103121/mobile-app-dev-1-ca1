@@ -3,5 +3,5 @@ package ie.setu.assignment1.models
 interface StoreCollection {
     fun findAll(): List<StoreModel>
     fun create(store: StoreModel)
-    fun update(placemark: StoreModel)
+    fun update(store: StoreModel)
 }

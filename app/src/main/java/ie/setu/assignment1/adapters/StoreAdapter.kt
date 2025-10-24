@@ -31,7 +31,9 @@ class StoreAdapter(private var stores: List<StoreModel>, private val listener: S
 
         fun bind(store: StoreModel, listener: StoreListener) {
             binding.storeName.text = store.name
+            binding.location.text = store.location
             binding.description.text = store.description
+            binding.rating.rating = store.rating
             binding.root.setOnClickListener { listener.onStoreClick(store) }
         }
     }

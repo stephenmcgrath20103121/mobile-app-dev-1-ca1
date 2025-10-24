@@ -1,5 +1,8 @@
 package ie.setu.assignment1.activities
 
+import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.drawable.LayerDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -23,20 +26,33 @@ class StoreActivity : AppCompatActivity() {
         binding.toolbarAdd.title = title
         setSupportActionBar(binding.toolbarAdd)
         app = application as MainApp
+        val ratingStars = binding.ratingBar.progressDrawable as LayerDrawable
+        ratingStars.getDrawable(2).setColorFilter(Color.BLUE, PorterDuff.Mode.SRC_ATOP)
 
         if (intent.hasExtra("store_edit")) {
             edit = true
             store = intent.extras?.getParcelable("store_edit")!!
             binding.storeName.setText(store.name)
+            binding.location.setText(store.location)
             binding.description.setText(store.description)
+            binding.datePicker.updateDate(store.lastVisitYear,store.lastVisitMonth,store.lastVisitDay)
+            binding.ratingBar.rating = store.rating
             binding.btnAdd.setText(R.string.save_store)
         }
 
         binding.btnAdd.setOnClickListener() {
             store.name = binding.storeName.text.toString()
+            store.location = binding.location.text.toString()
             store.description = binding.description.text.toString()
+            store.lastVisitYear = binding.datePicker.year
+            store.lastVisitMonth = binding.datePicker.month
+            store.lastVisitDay = binding.datePicker.dayOfMonth
+            store.rating = binding.ratingBar.rating
             if (store.name.isEmpty()) {
                 Snackbar.make(it,R.string.enter_store_name, Snackbar.LENGTH_LONG)
+                    .show()
+            }else if (store.location.isEmpty()) {
+                Snackbar.make(it,R.string.enter_store_location, Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {

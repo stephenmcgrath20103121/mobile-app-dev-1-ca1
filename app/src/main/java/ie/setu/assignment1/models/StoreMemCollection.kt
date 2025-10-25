@@ -36,6 +36,14 @@ class StoreMemCollection : StoreCollection {
         }
     }
 
+    override fun delete(store: StoreModel) {
+        var foundStore: StoreModel? = stores.find { s -> s.id == store.id }
+        if (foundStore != null) {
+            stores.remove(foundStore)
+            logAll()
+        }
+    }
+
     private fun logAll() {
         stores.forEach { i("$it") }
     }

@@ -15,8 +15,5 @@ class MainApp : Application() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         Timber.plant(Timber.DebugTree())
         i("Store started")
-        //stores.add(StoreModel("One", "About one..."))
-        //stores.add(StoreModel("Two", "About two..."))
-        //stores.add(StoreModel("Three", "About three..."))
     }
 }

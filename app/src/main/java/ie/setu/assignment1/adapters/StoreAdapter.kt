@@ -8,6 +8,7 @@ import ie.setu.assignment1.models.StoreModel
 
 interface StoreListener {
     fun onStoreClick(store: StoreModel)
+    fun onStoreDeleteClick(store: StoreModel)
 }
 
 class StoreAdapter(private var stores: List<StoreModel>, private val listener: StoreListener) :
@@ -35,6 +36,7 @@ class StoreAdapter(private var stores: List<StoreModel>, private val listener: S
             binding.description.text = store.description
             binding.rating.rating = store.rating
             binding.root.setOnClickListener { listener.onStoreClick(store) }
+            binding.btnDelete.setOnClickListener { listener.onStoreDeleteClick(store) }
         }
     }
 }

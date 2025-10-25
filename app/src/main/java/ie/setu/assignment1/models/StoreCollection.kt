@@ -4,4 +4,5 @@ interface StoreCollection {
     fun findAll(): List<StoreModel>
     fun create(store: StoreModel)
     fun update(store: StoreModel)
+    fun delete(store: StoreModel)
 }

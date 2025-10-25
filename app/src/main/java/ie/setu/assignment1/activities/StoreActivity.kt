@@ -9,6 +9,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import ie.setu.assignment1.R
+import ie.setu.assignment1.adapters.StoreAdapter
 import ie.setu.assignment1.databinding.ActivityStoreBinding
 import ie.setu.assignment1.main.MainApp
 import ie.setu.assignment1.models.StoreModel
@@ -17,10 +18,10 @@ class StoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoreBinding
     var store = StoreModel()
     lateinit var app: MainApp
+    var edit = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var edit = false
         binding = ActivityStoreBinding.inflate(layoutInflater)
         setContentView(binding.root)
         binding.toolbarAdd.title = title

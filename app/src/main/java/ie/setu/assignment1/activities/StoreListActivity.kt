@@ -30,7 +30,6 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        //binding.recyclerView.adapter = StoreAdapter(app.stores)
         binding.recyclerView.adapter = StoreAdapter(app.stores.findAll(), this)
     }
 
@@ -63,6 +62,14 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
         val launcherIntent = Intent(this, StoreActivity::class.java)
         launcherIntent.putExtra("store_edit", store)
         getClickResult.launch(launcherIntent)
+    }
+
+    override fun onStoreDeleteClick(store: StoreModel) {
+        app.stores.delete(store)
+        (binding.recyclerView.adapter)?.
+        notifyItemRangeChanged(0,app.stores.findAll().size)
+        (binding.recyclerView.adapter)?.
+        notifyDataSetChanged()
     }
 
     private val getClickResult =

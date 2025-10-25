@@ -2,8 +2,10 @@ package ie.setu.assignment1.models
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
+import kotlinx.serialization.Serializable
 
 @Parcelize
+@Serializable
 data class StoreModel(var id: Long = 0,
                       var name: String = "",
                       var location: String = "",

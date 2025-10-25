@@ -8,11 +8,13 @@ import timber.log.Timber.i
 
 class MainApp : Application() {
 
-    val stores = StoreMemCollection()
+    lateinit var stores: StoreMemCollection
 
     override fun onCreate() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        stores = StoreMemCollection(this)
+        stores.load()
         Timber.plant(Timber.DebugTree())
         i("Store started")
     }

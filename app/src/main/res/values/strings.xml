@@ -13,4 +13,7 @@
     <string name="save_store"> Save Store </string>
     <string name="enter_store_name"> Please enter the Store\'s Name </string>
     <string name="enter_store_location"> Please enter the Store\'s Location </string>
+    <string name="button_addImage"> Add Image </string>
+    <string name="select_store_image">Select Store Image</string>
+    <string name="change_store_image">Change Store Image</string>
 </resources>

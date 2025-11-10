@@ -1,11 +1,12 @@
 package ie.setu.assignment1.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 import kotlinx.serialization.Serializable
 
 @Parcelize
-@Serializable
+//@Serializable
 data class StoreModel(var id: Long = 0,
                       var name: String = "",
                       var location: String = "",
@@ -13,4 +14,6 @@ data class StoreModel(var id: Long = 0,
                       var lastVisitDay: Int = 1,
                       var lastVisitMonth: Int = 0,
                       var lastVisitYear: Int = 2025,
-                      var description: String = ""): Parcelable
+                      var description: String = "",
+                      var image: Uri = Uri.EMPTY): Parcelable
+

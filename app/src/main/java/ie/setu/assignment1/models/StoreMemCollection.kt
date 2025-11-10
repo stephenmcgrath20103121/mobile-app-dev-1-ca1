@@ -25,7 +25,7 @@ class StoreMemCollection(context: Context) : StoreCollection {
         store.id = getId()
         stores.add(store)
         logAll()
-        save()
+        //save()
     }
 
     override fun update(store: StoreModel) {
@@ -38,8 +38,9 @@ class StoreMemCollection(context: Context) : StoreCollection {
             foundStore.lastVisitMonth = store.lastVisitMonth
             foundStore.lastVisitDay = store.lastVisitDay
             foundStore.rating = store.rating
+            foundStore.image = store.image
             logAll()
-            save()
+            //save()
         }
     }
 
@@ -48,7 +49,7 @@ class StoreMemCollection(context: Context) : StoreCollection {
         if (foundStore != null) {
             stores.remove(foundStore)
             logAll()
-            save()
+            //save()
         }
     }
 
@@ -56,6 +57,7 @@ class StoreMemCollection(context: Context) : StoreCollection {
         stores.forEach { i("$it") }
     }
 
+    /*
     fun load() {
         if (file.exists()) {
             val text = file.readText()
@@ -70,4 +72,5 @@ class StoreMemCollection(context: Context) : StoreCollection {
     private fun save() {
         file.writeText(json.encodeToString(stores))
     }
+     */
 }

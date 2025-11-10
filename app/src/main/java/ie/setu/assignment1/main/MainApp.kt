@@ -14,7 +14,7 @@ class MainApp : Application() {
         super.onCreate()
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         stores = StoreMemCollection(this)
-        stores.load()
+        //stores.load()
         Timber.plant(Timber.DebugTree())
         i("Store started")
     }

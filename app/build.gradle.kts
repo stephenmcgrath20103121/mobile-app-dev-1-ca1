@@ -51,6 +51,7 @@ dependencies {
 
     implementation(libs.timber)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.picasso)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

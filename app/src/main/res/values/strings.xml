@@ -3,7 +3,6 @@
     <string name="button_addStore">Add Store</string>
     <string name="button_deleteStore">Delete Store</string>
     <string name="hint_storeName">Store Name</string>
-    <string name="hint_storeLocation">Store Location</string>
     <string name="hint_storeDescription">Description of Store</string>
     <string name="title_lastVisitDate">Date of Last Visit:</string>
     <string name="title_rating">Store Rating:</string>
@@ -12,8 +11,9 @@
     <string name="menu_deleteStore">Delete</string>
     <string name="save_store"> Save Store </string>
     <string name="enter_store_name"> Please enter the Store\'s Name </string>
-    <string name="enter_store_location"> Please enter the Store\'s Location </string>
     <string name="button_addImage"> Add Image </string>
     <string name="select_store_image">Select Store Image</string>
     <string name="change_store_image">Change Store Image</string>
+    <string name="button_location">Set Store Location</string>
+    <string name="title_activity_map">Map Activity</string>
 </resources>

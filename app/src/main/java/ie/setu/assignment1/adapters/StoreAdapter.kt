@@ -3,6 +3,7 @@ package ie.setu.assignment1.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import ie.setu.assignment1.databinding.CardStoreBinding
 import ie.setu.assignment1.models.StoreModel
 
@@ -32,9 +33,10 @@ class StoreAdapter(private var stores: List<StoreModel>, private val listener: S
 
         fun bind(store: StoreModel, listener: StoreListener) {
             binding.storeName.text = store.name
-            binding.location.text = store.location
+            //binding.location.text = store.location
             binding.description.text = store.description
             binding.rating.rating = store.rating
+            Picasso.get().load(store.image).resize(200,200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onStoreClick(store) }
             binding.btnDelete.setOnClickListener { listener.onStoreDeleteClick(store) }
         }

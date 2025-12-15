@@ -32,13 +32,16 @@ class StoreMemCollection(context: Context) : StoreCollection {
         var foundStore: StoreModel? = stores.find { s -> s.id == store.id }
         if (foundStore != null) {
             foundStore.name = store.name
-            foundStore.location = store.location
+            //foundStore.location = store.location
             foundStore.description = store.description
             foundStore.lastVisitYear = store.lastVisitYear
             foundStore.lastVisitMonth = store.lastVisitMonth
             foundStore.lastVisitDay = store.lastVisitDay
             foundStore.rating = store.rating
             foundStore.image = store.image
+            foundStore.lat = store.lat
+            foundStore.lng = store.lng
+            foundStore.zoom = store.zoom
             logAll()
             //save()
         }

@@ -17,14 +17,17 @@ import ie.setu.assignment1.R
 import ie.setu.assignment1.databinding.ActivityStoreBinding
 import ie.setu.assignment1.helpers.showImagePicker
 import ie.setu.assignment1.main.MainApp
+import ie.setu.assignment1.models.Location
 import ie.setu.assignment1.models.StoreModel
 import timber.log.Timber.i
 
 class StoreActivity : AppCompatActivity() {
     private lateinit var binding: ActivityStoreBinding
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
     var store = StoreModel()
     lateinit var app: MainApp
     var edit = false
+    //var location = Location(52.245696, -7.139102, 15f)
     private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +45,7 @@ class StoreActivity : AppCompatActivity() {
             edit = true
             store = intent.extras?.getParcelable("store_edit")!!
             binding.storeName.setText(store.name)
-            binding.location.setText(store.location)
+            //binding.location.setText(store.location)
             binding.description.setText(store.description)
             binding.datePicker.updateDate(store.lastVisitYear,store.lastVisitMonth,store.lastVisitDay)
             binding.ratingBar.rating = store.rating
@@ -57,7 +60,7 @@ class StoreActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             store.name = binding.storeName.text.toString()
-            store.location = binding.location.text.toString()
+            //store.location = binding.location.text.toString()
             store.description = binding.description.text.toString()
             store.lastVisitYear = binding.datePicker.year
             store.lastVisitMonth = binding.datePicker.month
@@ -66,10 +69,10 @@ class StoreActivity : AppCompatActivity() {
             if (store.name.isEmpty()) {
                 Snackbar.make(it,R.string.enter_store_name, Snackbar.LENGTH_LONG)
                     .show()
-            }else if (store.location.isEmpty()) {
+            /*}else if (store.location.isEmpty()) {
                 Snackbar.make(it,R.string.enter_store_location, Snackbar.LENGTH_LONG)
                     .show()
-            } else {
+            */} else {
                 if (edit) {
                     app.stores.update(store.copy())
                 } else {
@@ -87,6 +90,20 @@ class StoreActivity : AppCompatActivity() {
         }
 
         registerImagePickerCallback()
+
+        binding.storeLocation.setOnClickListener {
+            val location = Location(52.245696, -7.139102, 15f)
+            if (store.zoom != 0f) {
+                location.lat =  store.lat
+                location.lng = store.lng
+                location.zoom = store.zoom
+            }
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+        }
+
+        registerMapCallback()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -116,10 +133,31 @@ class StoreActivity : AppCompatActivity() {
                                 .load(store.image)
                                 .into(binding.storeImage)
                             binding.chooseImage.setText(R.string.change_store_image)
-                        } // end of if
+                        }
                     }
                     RESULT_CANCELED -> { } else -> { }
                 }
             }
     }
+
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            store.lat = location.lat
+                            store.lng = location.lng
+                            store.zoom = location.zoom
+                        }
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
+
 }

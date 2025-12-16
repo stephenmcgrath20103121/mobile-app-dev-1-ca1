@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
@@ -27,8 +28,7 @@ class StoreActivity : AppCompatActivity() {
     var store = StoreModel()
     lateinit var app: MainApp
     var edit = false
-    //var location = Location(52.245696, -7.139102, 15f)
-    private lateinit var imageIntentLauncher : ActivityResultLauncher<Intent>
+    private lateinit var imageIntentLauncher : ActivityResultLauncher<PickVisualMediaRequest>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +45,6 @@ class StoreActivity : AppCompatActivity() {
             edit = true
             store = intent.extras?.getParcelable("store_edit")!!
             binding.storeName.setText(store.name)
-            //binding.location.setText(store.location)
             binding.description.setText(store.description)
             binding.datePicker.updateDate(store.lastVisitYear,store.lastVisitMonth,store.lastVisitDay)
             binding.ratingBar.rating = store.rating
@@ -60,7 +59,6 @@ class StoreActivity : AppCompatActivity() {
 
         binding.btnAdd.setOnClickListener() {
             store.name = binding.storeName.text.toString()
-            //store.location = binding.location.text.toString()
             store.description = binding.description.text.toString()
             store.lastVisitYear = binding.datePicker.year
             store.lastVisitMonth = binding.datePicker.month
@@ -85,7 +83,10 @@ class StoreActivity : AppCompatActivity() {
         }
 
         binding.chooseImage.setOnClickListener {
-            showImagePicker(imageIntentLauncher)
+            val request = PickVisualMediaRequest.Builder()
+                .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
+                .build()
+            imageIntentLauncher.launch(request)
             i("Select image")
         }
 
@@ -108,36 +109,40 @@ class StoreActivity : AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_store, menu)
+        if (edit)
+            menu.getItem(0).isVisible = true
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.item_cancel -> {
+            R.id.item_delete -> {
+                setResult(99)
+                app.stores.delete(store)
                 finish()
-            }
+            }        R.id.item_cancel -> { finish() }
         }
         return super.onOptionsItemSelected(item)
     }
 
     private fun registerImagePickerCallback() {
-        imageIntentLauncher =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { result ->
-                when(result.resultCode){
-                    RESULT_OK -> {
-                        if (result.data != null) {
-                            i("Got Result ${result.data!!.data}")
-                            store.image = result.data!!.data!!
-                            Picasso.get()
-                                .load(store.image)
-                                .into(binding.storeImage)
-                            binding.chooseImage.setText(R.string.change_store_image)
-                        }
-                    }
-                    RESULT_CANCELED -> { } else -> { }
-                }
+        imageIntentLauncher = registerForActivityResult(
+            ActivityResultContracts.PickVisualMedia()
+        ) {
+            try{
+                contentResolver
+                    .takePersistableUriPermission(it!!,
+                        Intent.FLAG_GRANT_READ_URI_PERMISSION )
+                store.image = it
+                i("IMG :: ${store.image}")
+                Picasso.get()
+                    .load(store.image)
+                    .into(binding.storeImage)
             }
+            catch(e:Exception){
+                e.printStackTrace()
+            }
+        }
     }
 
     private fun registerMapCallback() {

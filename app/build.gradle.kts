@@ -2,7 +2,6 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.parcelize)
-    alias(libs.plugins.kotlin.serialization)
     alias(libs.plugins.google.android.libraries.mapsplatform.secrets.gradle.plugin)
 }
 
@@ -51,8 +50,8 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
 
     implementation(libs.timber)
-    implementation(libs.kotlinx.serialization.json)
     implementation(libs.picasso)
+    implementation(libs.gson)
     implementation(libs.play.services.maps)
 
     testImplementation(libs.junit)

@@ -18,6 +18,7 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
 
     lateinit var app: MainApp
     private lateinit var binding: ActivityStoreListBinding
+    private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,18 +59,11 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
             }
         }
 
-    override fun onStoreClick(store: StoreModel) {
+    override fun onStoreClick(store: StoreModel, pos : Int) {
         val launcherIntent = Intent(this, StoreActivity::class.java)
         launcherIntent.putExtra("store_edit", store)
+        position = pos
         getClickResult.launch(launcherIntent)
-    }
-
-    override fun onStoreDeleteClick(store: StoreModel) {
-        app.stores.delete(store)
-        (binding.recyclerView.adapter)?.
-        notifyItemRangeChanged(0,app.stores.findAll().size)
-        (binding.recyclerView.adapter)?.
-        notifyDataSetChanged()
     }
 
     private val getClickResult =
@@ -80,5 +74,8 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
                 (binding.recyclerView.adapter)?.
                 notifyItemRangeChanged(0,app.stores.findAll().size)
             }
+            else // Deleting
+                if (it.resultCode == 99)
+                        (binding.recyclerView.adapter)?.notifyItemRemoved(position)
         }
 }

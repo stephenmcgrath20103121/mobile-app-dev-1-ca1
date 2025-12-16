@@ -8,8 +8,7 @@ import ie.setu.assignment1.databinding.CardStoreBinding
 import ie.setu.assignment1.models.StoreModel
 
 interface StoreListener {
-    fun onStoreClick(store: StoreModel)
-    fun onStoreDeleteClick(store: StoreModel)
+    fun onStoreClick(store: StoreModel, position: Int)
 }
 
 class StoreAdapter(private var stores: List<StoreModel>, private val listener: StoreListener) :
@@ -33,12 +32,10 @@ class StoreAdapter(private var stores: List<StoreModel>, private val listener: S
 
         fun bind(store: StoreModel, listener: StoreListener) {
             binding.storeName.text = store.name
-            //binding.location.text = store.location
             binding.description.text = store.description
             binding.rating.rating = store.rating
             Picasso.get().load(store.image).resize(200,200).into(binding.imageIcon)
-            binding.root.setOnClickListener { listener.onStoreClick(store) }
-            binding.btnDelete.setOnClickListener { listener.onStoreDeleteClick(store) }
+            binding.root.setOnClickListener { listener.onStoreClick(store, adapterPosition) }
         }
     }
 }

@@ -1,9 +1,11 @@
 package ie.setu.assignment1.views.storelist
 
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.assignment1.R
@@ -42,8 +44,19 @@ class StoreListView : AppCompatActivity(), StoreListener {
         when (item.itemId) {
             R.id.item_add -> { presenter.doAddStore() }
             R.id.item_map -> { presenter.doShowStoresMap() }
+            R.id.light_dark_toggle -> { doToggleLightDarkMode() }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    fun doToggleLightDarkMode() {
+        val darkModeFlags = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK// Retrieve the Mode of the App.
+        val isDarkModeOn = darkModeFlags == Configuration.UI_MODE_NIGHT_YES//Check if the Dark Mode is On
+        if (isDarkModeOn) {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)//Switch off the dark mode.
+        } else {
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
     }
 
     override fun onStoreClick(store: StoreModel, position: Int) {

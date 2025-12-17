@@ -2,6 +2,20 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Assignment1" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+        <item name="colorPrimaryDark">@color/colorAccentDark</item>
+        <item name="colorPrimaryVariant">@color/colorPrimary</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.Assignment1" parent="Base.Theme.Assignment1" />
+
+    <style name="Theme.Assignment1.Splash" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/colorLogo</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/logo_inset</item>
+        <item name="postSplashScreenTheme">@style/Theme.Assignment1</item>
     </style>
 </resources>

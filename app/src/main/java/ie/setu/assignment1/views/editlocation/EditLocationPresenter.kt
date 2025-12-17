@@ -7,7 +7,6 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
-import ie.setu.assignment1.views.editlocation.EditLocationView
 import ie.setu.assignment1.models.Location
 
 class EditLocationPresenter (val view: EditLocationView) {
@@ -15,7 +14,6 @@ class EditLocationPresenter (val view: EditLocationView) {
     var location = Location()
 
     init {
-        //location = view.intent.extras?.getParcelable("location",Location::class.java)!!
         location = view.intent.extras?.getParcelable("location")!!
     }
 

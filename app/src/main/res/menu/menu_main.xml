@@ -12,4 +12,9 @@
         android:icon="@android:drawable/ic_menu_mapmode"
         android:title="@string/menu_addStore"
         app:showAsAction="always"/>
+    <item
+        android:id="@+id/light_dark_toggle"
+        android:icon="@android:drawable/ic_menu_view"
+        android:title="@string/menu_addStore"
+        app:showAsAction="always"/>
 </menu>

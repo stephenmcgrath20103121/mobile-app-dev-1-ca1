@@ -6,7 +6,6 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import ie.setu.assignment1.views.store.StoreView
 import ie.setu.assignment1.main.MainApp
 import ie.setu.assignment1.models.Location
 import ie.setu.assignment1.models.StoreModel
@@ -24,7 +23,6 @@ class StorePresenter(private val view: StoreView) {
     init {
         if (view.intent.hasExtra("store_edit")) {
             edit = true
-            //store = view.intent.getParcelableExtra("store_edit",StoreModel::class.java)!!
             store = view.intent.extras?.getParcelable("store_edit")!!
             view.showStore(store)
         }
@@ -59,7 +57,6 @@ class StorePresenter(private val view: StoreView) {
     }
 
     fun doSelectImage() {
-        //   showImagePicker(imageIntentLauncher,view)
         val request = PickVisualMediaRequest.Builder()
             .setMediaType(ActivityResultContracts.PickVisualMedia.ImageOnly)
             .build()
@@ -119,7 +116,7 @@ class StorePresenter(private val view: StoreView) {
                             store.lat = location.lat
                             store.lng = location.lng
                             store.zoom = location.zoom
-                        } // end of if
+                        }
                     }
                     AppCompatActivity.RESULT_CANCELED -> { } else -> { }
                 }

@@ -22,7 +22,6 @@ class EditLocationView : AppCompatActivity(), OnMapReadyCallback,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
         presenter = EditLocationPresenter(this)
-        //location = intent.extras?.getParcelable("location",Location::class.java)!!
         location = intent.extras?.getParcelable<Location>("location")!!
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment

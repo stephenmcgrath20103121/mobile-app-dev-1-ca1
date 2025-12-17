@@ -31,7 +31,8 @@
             android:label="@string/title_activity_map" />
         <activity
             android:name=".views.storelist.StoreListView"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.Assignment1.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

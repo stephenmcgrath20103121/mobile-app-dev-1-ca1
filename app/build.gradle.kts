@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.gson)
     implementation(libs.play.services.maps)
     implementation(libs.androidx.cardview)
+    implementation("androidx.core:core-splashscreen:1.0.0")
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

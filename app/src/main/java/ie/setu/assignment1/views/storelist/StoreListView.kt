@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.recyclerview.widget.LinearLayoutManager
 import ie.setu.assignment1.R
 import ie.setu.assignment1.databinding.ActivityStoreListBinding
@@ -18,6 +19,7 @@ class StoreListView : AppCompatActivity(), StoreListener {
     private var position: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        installSplashScreen()
         super.onCreate(savedInstanceState)
         binding = ActivityStoreListBinding.inflate(layoutInflater)
         setContentView(binding.root)

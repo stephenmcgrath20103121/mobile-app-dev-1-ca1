@@ -1,4 +1,4 @@
-package ie.setu.assignment1.adapters
+package ie.setu.assignment1.views.storelist
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ie.setu.assignment1.activities.StoreActivity">
+    tools:context="ie.setu.assignment1.views.store.StoreView">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout2"
@@ -27,11 +27,13 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="408dp"
+        android:layout_height="656dp"
+        android:layout_below="@id/appBarLayout2"
         android:fillViewport="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="116dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -130,36 +132,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/ratingText" />
 
             <Button
-                android:id="@+id/btnAdd"
-                android:layout_width="365dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="@string/button_addStore"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
-
-            <Button
                 android:id="@+id/chooseImage"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="@string/button_addImage"
-                app:layout_constraintStart_toStartOf="@+id/btnAdd"
-                app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+                app:layout_constraintBottom_toTopOf="@+id/storeImage"
+                app:layout_constraintStart_toStartOf="@+id/ratingText"
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar"
+                app:layout_constraintVertical_bias="0.0" />
 
             <Button
                 android:id="@+id/storeLocation"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="64dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/button_location"
-                app:layout_constraintEnd_toEndOf="@+id/btnAdd"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintBottom_toTopOf="@+id/storeImage"
+                app:layout_constraintEnd_toEndOf="@+id/ratingText"
                 app:layout_constraintStart_toEndOf="@+id/chooseImage"
-                app:layout_constraintTop_toBottomOf="@+id/btnAdd" />
+                app:layout_constraintTop_toBottomOf="@+id/ratingBar" />
 
             <ImageView
                 android:id="@+id/storeImage"
@@ -174,7 +167,7 @@
                 app:layout_constraintHorizontal_bias="0.555"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/storeLocation"
-                app:layout_constraintVertical_bias="0.173"
+                app:layout_constraintVertical_bias="0.060000002"
                 app:srcCompat="@drawable/ic_launcher_background" />
 
 

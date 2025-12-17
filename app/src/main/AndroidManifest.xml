@@ -16,7 +16,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Assignment1">
         <activity
-            android:name=".activities.StoreMapsActivity"
+            android:name=".views.map.StoreMapView"
             android:exported="false"
             android:label="@string/title_activity_store_maps"
             android:theme="@style/Theme.Assignment1" />
@@ -26,11 +26,11 @@
             android:value="@string/MAPS_API_KEY" />
 
         <activity
-            android:name=".activities.MapActivity"
+            android:name=".views.editlocation.EditLocationView"
             android:exported="false"
             android:label="@string/title_activity_map" />
         <activity
-            android:name=".activities.StoreListActivity"
+            android:name=".views.storelist.StoreListView"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -42,7 +42,7 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity android:name=".activities.StoreActivity">
+        <activity android:name=".views.store.StoreView">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

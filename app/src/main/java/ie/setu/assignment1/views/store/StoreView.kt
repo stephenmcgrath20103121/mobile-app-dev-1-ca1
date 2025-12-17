@@ -11,6 +11,7 @@ import ie.setu.assignment1.R
 import ie.setu.assignment1.databinding.ActivityStoreBinding
 import ie.setu.assignment1.models.StoreModel
 import timber.log.Timber
+import androidx.appcompat.app.AlertDialog
 
 class StoreView : AppCompatActivity() {
 
@@ -54,12 +55,24 @@ class StoreView : AppCompatActivity() {
                     Snackbar.make(binding.root, R.string.enter_store_name, Snackbar.LENGTH_LONG)
                         .show()
                 } else {
-                    // presenter.cachePlacemark(binding.placemarkTitle.text.toString(), binding.description.text.toString())
                     presenter.doAddOrSave(binding.storeName.text.toString(), binding.description.text.toString(), binding.datePicker.dayOfMonth, binding.datePicker.month, binding.datePicker.year, binding.ratingBar.rating)
                 }
             }
             R.id.item_delete -> {
-                presenter.doDelete()
+                val builder = AlertDialog.Builder(this)
+                builder.setMessage("Are you sure you want to delete this store?")
+                builder.setTitle("Confirm Deletion")
+                builder.setCancelable(false)
+                builder.setPositiveButton("Delete") {
+                    dialog, which -> presenter.doDelete()
+                }
+
+                builder.setNegativeButton("Cancel") {
+                    dialog, which -> dialog.cancel()
+                }
+
+                val alertDialog = builder.create()
+                alertDialog.show()
             }
             R.id.item_cancel -> {
                 presenter.doCancel()

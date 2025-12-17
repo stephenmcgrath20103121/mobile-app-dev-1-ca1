@@ -64,6 +64,11 @@ class StoreJSONCollection(private val context: Context) : StoreCollection {
         serialize()
     }
 
+    override fun findById(id:Long) : StoreModel? {
+        val foundStore: StoreModel? = stores.find { it.id == id }
+        return foundStore
+    }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(stores, listType)
         write(context, JSON_FILE, jsonString)

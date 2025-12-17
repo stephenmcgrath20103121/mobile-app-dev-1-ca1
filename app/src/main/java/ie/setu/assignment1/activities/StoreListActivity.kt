@@ -45,6 +45,10 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
                 val launcherIntent = Intent(this, StoreActivity::class.java)
                 getResult.launch(launcherIntent)
             }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, StoreMapsActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
+            }
         }
         return super.onOptionsItemSelected(item)
     }
@@ -58,6 +62,11 @@ class StoreListActivity : AppCompatActivity(), StoreListener {
                 notifyItemRangeChanged(0,app.stores.findAll().size)
             }
         }
+
+    private val mapIntentLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        )    { }
 
     override fun onStoreClick(store: StoreModel, pos : Int) {
         val launcherIntent = Intent(this, StoreActivity::class.java)

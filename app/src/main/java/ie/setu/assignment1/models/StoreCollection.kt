@@ -5,4 +5,5 @@ interface StoreCollection {
     fun create(store: StoreModel)
     fun update(store: StoreModel)
     fun delete(store: StoreModel)
+    fun findById(id:Long) : StoreModel?
 }

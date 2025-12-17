@@ -67,10 +67,7 @@ class StoreActivity : AppCompatActivity() {
             if (store.name.isEmpty()) {
                 Snackbar.make(it,R.string.enter_store_name, Snackbar.LENGTH_LONG)
                     .show()
-            /*}else if (store.location.isEmpty()) {
-                Snackbar.make(it,R.string.enter_store_location, Snackbar.LENGTH_LONG)
-                    .show()
-            */} else {
+            } else {
                 if (edit) {
                     app.stores.update(store.copy())
                 } else {
@@ -120,7 +117,10 @@ class StoreActivity : AppCompatActivity() {
                 setResult(99)
                 app.stores.delete(store)
                 finish()
-            }        R.id.item_cancel -> { finish() }
+            }
+            R.id.item_cancel -> {
+                finish()
+            }
         }
         return super.onOptionsItemSelected(item)
     }

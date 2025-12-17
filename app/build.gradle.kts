@@ -53,6 +53,7 @@ dependencies {
     implementation(libs.picasso)
     implementation(libs.gson)
     implementation(libs.play.services.maps)
+    implementation(libs.androidx.cardview)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

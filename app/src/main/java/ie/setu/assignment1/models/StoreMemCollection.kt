@@ -49,6 +49,11 @@ class StoreMemCollection : StoreCollection {
         }
     }
 
+    override fun findById(id:Long) : StoreModel? {
+        val foundStore: StoreModel? = stores.find { it.id == id }
+        return foundStore
+    }
+
     private fun logAll() {
         stores.forEach { i("$it") }
     }
